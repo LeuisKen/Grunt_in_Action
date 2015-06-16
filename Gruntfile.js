@@ -17,20 +17,23 @@ module.exports = function(grunt) {
         src: [ 'build', '.sass-cache' ]
       },
       stylesheets: {
-        src: [ 'build/**/*.css', '!build/application.css' ]
+        src: [ 'build/css/*.css']
       },
       scripts: {
-        src: [ 'build/**/*.js', '!build/application.js' ]
+        src: [ 'build/js/*.js']
       },
+      end: {
+        src: [ '.sass-cache', 'build/sass', 'build/coffee' ]
+      }
     },
 
     sass: {
       dist: {
         files: [{
           expand: true,
-          cwd: 'dev',
-          src: ['**/*.scss'],
-          dest: 'build',
+          cwd: 'dev/sass',
+          src: ['*.scss'],
+          dest: 'build/css',
           ext: '.css'
         }]
       }
@@ -39,38 +42,41 @@ module.exports = function(grunt) {
     autoprefixer: {
       build: {
         expand: true,
-        cwd: 'build',
-        src: [ '**/*.css' ],
-        dest: 'build'
+        cwd: 'build/css',
+        src: [ '*.css' ],
+        dest: 'build/css'
       }
     },
 
     cssmin: {
-      build: {
-        files: {
-          'build/sass/application.css': [ 'build/**/*.css' ]
-        }
+      minify: {
+        expand: true,
+        cwd: 'build/css/',
+        src: ['*.css', '!*.min.css'],
+        dest: 'build/css/',
+        ext: '.min.css'
       }
     },
 
     coffee: {
       build: {
         expand: true,
-        cwd: 'dev',
-        src: [ '**/*.coffee' ],
-        dest: 'build',
+        cwd: 'dev/coffee',
+        src: [ '*.coffee' ],
+        dest: 'build/js',
         ext: '.js'
       }
     },
 
     uglify: {
       build: {
-        options: {
-          mangle: false
-        },
-        files: {
-          'build/coffee/application.js': [ 'build/**/*.js' ]
-        }
+        files: [{
+            expand: true,
+            cwd: 'build/js',
+            src: '**/*.js',
+            dest: 'build/js',
+            ext: '.min.js'
+        }]
       }
     },
 
@@ -118,6 +124,6 @@ module.exports = function(grunt) {
   grunt.registerTask(
     'build', 
     'Compiles all of the assets and copies the files to the build directory.', 
-    [ 'clean:build', 'copy', 'stylesheets', 'scripts', 'jade' ]
+    [ 'clean:build', 'copy', 'stylesheets', 'scripts', 'jade', 'clean:end' ]
   );
 };

@@ -1,11 +1,37 @@
 doctype html
 html(lang="en")
 	head
-		title 项目构建实践
 		meta(charset="utf-8")
-		link(rel="stylesheet" type="text/css" href="sass/application.css")
-	body
-		h1 使用Jade模板引擎
-		#container.col
-			p 使用Sass、Coffee、Grunt
-		script(src="coffee/application.js")
+		meta(http-equiv="X-UA-Compatible" content="IE=edge,chrome=1")
+		meta(name="viewport" content="width=device-width")
+		title Birds of California
+		link(rel="stylesheet" href="css/reset.css" type="text/css" media="screen" charset="utf-8")
+		link(rel="stylesheet" href="css/birds.css" type="text/css" media="screen" charset="utf-8")
+	body.bd
+		header.container.header
+			h1.title Birds of California!
+		aside.sidebar
+			nav.bird-nav
+				ul.bird-list
+					// Redundant Class for performance
+					li.nav-li
+						a.nav-link(href="/california-condor") California Condor
+					li.nav-li
+						a.nav-link(href="/california-quail") California Quail
+					li.nav-li
+						a.nav-link(href="/california-gull") California Gull
+		.container.main
+			h2 California Gull
+			.hero-shot
+				a(href="http://www.flickr.com/photos/catlantis/5514922015/")
+					img.hero-img(src="http://farm6.staticflickr.com/5171/5514922015_bfeab78ce0_z.jpg")
+				p.caption Photo By 
+					a(href="http://www.flickr.com/photos/catlantis/5514922015/") C.L.Maclay
+			section.content
+				p Lorem ipsum dolor...
+		footer.container.ft
+			ul.foot-links
+				li
+					a(href="/copyright") &copy; 2012 Awesome Bird Foundation, All Rights Reserved
+				li
+					a(href="/tos") Terms of Service
